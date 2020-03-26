@@ -44,3 +44,15 @@ func ConvertInput(input string) (int, int) {
 
 	return col, row
 }
+
+func EvaluateUserDec(userDec string) (bool, error) {
+	if userDec == "Y" {
+		fmt.Println("You will play against the computer!")
+		return true, nil
+	} else if userDec == "n" {
+		fmt.Println("You will play against another human.")
+		return false, nil
+	} else {
+		return false, fmt.Errorf("Cannot handle user input.")
+	}
+}
