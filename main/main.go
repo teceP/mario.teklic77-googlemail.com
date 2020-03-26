@@ -23,10 +23,6 @@ type Coordinate struct {
 	player int
 }
 
-type Player struct {
-	sign rune
-}
-
 type Game struct {
 	moves  int
 	active int
