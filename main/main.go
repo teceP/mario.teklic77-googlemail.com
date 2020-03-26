@@ -61,13 +61,19 @@ func main() {
 		c := game.nextMove()
 		game.makeMove(c)
 		game.printBoard()
+
 		if game.checkWinner() {
+			fmt.Println(game.activeSing(), " has won!")
 			break
+		}
+
+		if game.moves == 9 {
+			fmt.Println("Tie!")
 		}
 		game.nextPlayer()
 	}
 
-	fmt.Println(game.activeSing(), " has won!\nGoodbye.")
+	fmt.Println("Goodbye.")
 }
 
 // Board actions
@@ -257,7 +263,7 @@ func (g *Game) bestMove() Coordinate {
 				}
 
 				//Make move
-				g.makeMove(currentMove)
+				g.board.coords[currentMove.x][currentMove.y].player = g.active
 
 				//compute elevation func for this move
 				moveVal := minimax(g.board, 0, false)
@@ -291,6 +297,7 @@ func emptyCells(b Board) (cells []Coordinate) {
 
 func (g *Game) makeMove(c Coordinate) {
 	g.board.coords[c.x][c.y].player = c.player
+	g.moves = g.moves + 1
 }
 
 // Signs
