@@ -59,7 +59,6 @@ func main() {
 	//Game loop
 	for {
 		c := game.nextMove()
-		fmt.Println(c)
 		game.makeMove(c)
 		game.printBoard()
 		if game.checkWinner() {
@@ -263,14 +262,11 @@ func (g *Game) bestMove() Coordinate {
 				//compute elevation func for this move
 				moveVal := minimax(g.board, 0, false)
 
-				fmt.Println("moveVal: ", moveVal)
 				//undo move
 				g.board.coords[i][j].player = PLAYER_NO
 
 				//if value of current move better than best, update
 				if moveVal > bestVal {
-					fmt.Println(currentMove, " => currentMove")
-
 					bestMove.x, bestMove.y = i, j
 					bestVal = moveVal
 				}
