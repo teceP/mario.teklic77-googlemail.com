@@ -172,11 +172,9 @@ func evaluate(b Board) int {
 				return -10
 			}
 		}
-
 		//no one won
 		return 0
 	}
-
 	return 0
 }
 
@@ -237,7 +235,6 @@ func minimax(b Board, depth int, isMax bool) int {
 		}
 		return int(best)
 	}
-
 }
 
 func (g *Game) bestMove() Coordinate {
@@ -280,7 +277,6 @@ func (g *Game) bestMove() Coordinate {
 			}
 		}
 	}
-
 	return bestMove
 }
 
