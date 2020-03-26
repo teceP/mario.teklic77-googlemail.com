@@ -133,51 +133,48 @@ func (g *Game) nextMove() Coordinate {
 
 func evaluate(b Board) int {
 	for i := range b.coords {
-		for j := range b.coords[i] {
-
-			// -
-			if b.coords[i][0] == b.coords[i][1] &&
-				b.coords[i][1] == b.coords[i][2] {
-				if b.coords[i][0].player == PLAYER_B {
-					return +10
-				} else if b.coords[i][0].player == PLAYER_A {
-					return -10
-				}
+		// -
+		if b.coords[i][0].player == b.coords[i][1].player &&
+			b.coords[i][1].player == b.coords[i][2].player {
+			if b.coords[i][0].player == PLAYER_B {
+				return +10
+			} else if b.coords[i][0].player == PLAYER_A {
+				return -10
 			}
-
-			// |
-			if b.coords[0][j] == b.coords[1][j] &&
-				b.coords[1][j] == b.coords[2][j] {
-				if b.coords[0][j].player == PLAYER_B {
-					return +10
-				} else if b.coords[0][j].player == PLAYER_A {
-					return -10
-				}
-			}
-
-			// \
-			if b.coords[0][0] == b.coords[1][1] &&
-				b.coords[1][1] == b.coords[2][2] {
-				if b.coords[0][0].player == PLAYER_B {
-					return +10
-				} else if b.coords[0][0].player == PLAYER_A {
-					return -10
-				}
-			}
-
-			// /
-			if b.coords[0][2] == b.coords[1][1] &&
-				b.coords[1][1] == b.coords[2][0] {
-				if b.coords[0][2].player == PLAYER_B {
-					return +10
-				} else if b.coords[0][2].player == PLAYER_A {
-					return -10
-				}
-			}
-
-			//no one won
-			return 0
 		}
+
+		// |
+		if b.coords[0][i].player == b.coords[1][i].player &&
+			b.coords[1][i].player == b.coords[2][i].player {
+			if b.coords[0][i].player == PLAYER_B {
+				return +10
+			} else if b.coords[0][i].player == PLAYER_A {
+				return -10
+			}
+		}
+
+		// \
+		if b.coords[0][0].player == b.coords[1][1].player &&
+			b.coords[1][1].player == b.coords[2][2].player {
+			if b.coords[0][0].player == PLAYER_B {
+				return +10
+			} else if b.coords[0][0].player == PLAYER_A {
+				return -10
+			}
+		}
+
+		// /
+		if b.coords[0][2].player == b.coords[1][1].player &&
+			b.coords[1][1].player == b.coords[2][0].player {
+			if b.coords[0][2].player == PLAYER_B {
+				return +10
+			} else if b.coords[0][2].player == PLAYER_A {
+				return -10
+			}
+		}
+
+		//no one won
+		return 0
 	}
 
 	return 0
@@ -198,7 +195,7 @@ func minimax(b Board, depth int, isMax bool) int {
 
 	//if its max's move
 	if isMax {
-		best := -1000.0
+		best := -10000.0
 
 		for i := range b.coords {
 			for j := range b.coords[i] {
@@ -210,8 +207,6 @@ func minimax(b Board, depth int, isMax bool) int {
 					//call minimax recur.
 					best = math.Max(float64(best), float64(minimax(b, depth+1, !isMax)))
 
-					fmt.Println("miniMAX: ", best)
-
 					//undo move
 					b.coords[i][j].player = PLAYER_NO
 				}
@@ -221,7 +216,7 @@ func minimax(b Board, depth int, isMax bool) int {
 		return int(best)
 	} else {
 		// min's move
-		best := 0.0
+		best := 10000.0
 
 		//trav all cells
 
@@ -254,7 +249,7 @@ func (g *Game) bestMove() Coordinate {
 		player: g.active,
 	}
 
-	bestVal := 0
+	bestVal := -10000
 
 	for i := range g.board.coords {
 		for j := range g.board.coords[i] {
@@ -271,6 +266,7 @@ func (g *Game) bestMove() Coordinate {
 				//compute elevation func for this move
 				moveVal := minimax(g.board, 0, false)
 
+				fmt.Println("moveVal: ", moveVal)
 				//undo move
 				g.board.coords[i][j].player = PLAYER_NO
 
