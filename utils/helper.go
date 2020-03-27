@@ -2,12 +2,14 @@ package utils
 
 import "fmt"
 
+//Reads the next line of the users cmd-line-input
 func ReadInput() string {
 	var input string
 	fmt.Scanln(&input)
 	return input
 }
 
+//Checks if the string length is 3
 func CheckInputLength(input string) bool {
 
 	if len(input) != 3 {
@@ -19,6 +21,7 @@ func CheckInputLength(input string) bool {
 	return true
 }
 
+//Converts the user-input into 2 coordinates (x/y)
 func ConvertInput(input string) (int, int) {
 	var col, row = -1, -1
 
@@ -45,6 +48,8 @@ func ConvertInput(input string) (int, int) {
 	return col, row
 }
 
+//Evaluates the users choice of playing against a computer or a human
+//Returns an error if the input wasnt correct
 func EvaluateUserDec(userDec string) (bool, error) {
 	if userDec == "Y" {
 		fmt.Println("You will play against the computer!")

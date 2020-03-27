@@ -18,16 +18,23 @@ const PLAYER_B_SIGN = 'O'
 
 // Structs
 
+//Represents the fields of the board
 type Board struct {
 	coords [3][3]Coordinate
 }
 
+//Each field can be owned by a player (PLAYER_A (1) or PLAYER_B (2)) or can be free (PLAYER_NO (0))
 type Coordinate struct {
 	x      int
 	y      int
 	player int
 }
 
+//The game struct, which contains several needed variables:
+//moves = number of moves
+//active = current player
+//board = board
+//computer = if true: the human plays against the computer
 type Game struct {
 	moves    int
 	active   int
@@ -78,6 +85,7 @@ func main() {
 
 // Board actions
 
+//Sets PLAYER_NO on each field (init func)
 func (b *Board) prepareBoard() {
 	for i, f := range b.coords {
 		for j, fj := range b.coords[i] {
@@ -90,6 +98,7 @@ func (b *Board) prepareBoard() {
 	}
 }
 
+//Chooses which player will begin
 func (g *Game) chooseBeginner() {
 	i := rand.Intn(2) //.. 1 or 2 -> PLAYER_A or PLAYER_B
 	i = i + 1
@@ -102,6 +111,7 @@ func (g *Game) chooseBeginner() {
 	}
 }
 
+//Changes the current player to the next player
 func (g *Game) nextPlayer() {
 	if g.active == PLAYER_A {
 		g.active = PLAYER_B
@@ -112,6 +122,7 @@ func (g *Game) nextPlayer() {
 
 // Moves
 
+//Next move either by human, or redirects to computers automatic-move
 func (g *Game) nextMove() Coordinate {
 
 	//If computer has to choose the next move
@@ -136,6 +147,8 @@ func (g *Game) nextMove() Coordinate {
 	return c
 }
 
+//Evaluates a board by its placed moves
+//Retuns 0 if no one won
 func evaluate(b Board) int {
 	for i := range b.coords {
 		// -
@@ -177,12 +190,11 @@ func evaluate(b Board) int {
 				return -10
 			}
 		}
-		//no one won
-		return 0
 	}
 	return 0
 }
 
+//Algorithms which calculates the next smartest move
 func minimax(b Board, depth int, isMax bool) int {
 	score := evaluate(b)
 
@@ -242,6 +254,7 @@ func minimax(b Board, depth int, isMax bool) int {
 	}
 }
 
+//Receives the next smartest move
 func (g *Game) bestMove() Coordinate {
 	//gc == gameCopy
 	//gc := g.copyGame()
@@ -282,6 +295,7 @@ func (g *Game) bestMove() Coordinate {
 	return bestMove
 }
 
+//Returns all leftover (free) cells of the board
 func emptyCells(b Board) (cells []Coordinate) {
 	for i := range b.coords {
 		for j := range b.coords[i] {
@@ -293,8 +307,7 @@ func emptyCells(b Board) (cells []Coordinate) {
 	return
 }
 
-// AI func's end
-
+//Makes a move and increments the move var
 func (g *Game) makeMove(c Coordinate) {
 	g.board.coords[c.x][c.y].player = c.player
 	g.moves = g.moves + 1
@@ -302,6 +315,7 @@ func (g *Game) makeMove(c Coordinate) {
 
 // Signs
 
+//Returns the sign of the active player
 func (g *Game) activeSing() string {
 	if g.active == PLAYER_A {
 		return strconv.QuoteRune(PLAYER_A_SIGN)
@@ -310,6 +324,7 @@ func (g *Game) activeSing() string {
 	}
 }
 
+//Returns the sign of a specific field, depending on the status of the field
 func (b *Board) coordSign(x int, y int) string {
 	if b.coords[x][y].player == PLAYER_A {
 		return strconv.QuoteRune(PLAYER_A_SIGN)
@@ -322,6 +337,7 @@ func (b *Board) coordSign(x int, y int) string {
 
 // Prints
 
+//Prints the board
 func (g *Game) printBoard() {
 	fmt.Println("=========================")
 	for i := range g.board.coords {
@@ -335,6 +351,8 @@ func (g *Game) printBoard() {
 
 // Proofs
 
+//Checks if the field is available
+//Returns false, if field is busy
 func (g *Game) checkAvailability(c Coordinate) bool {
 
 	if checkRange(c) {
@@ -347,6 +365,7 @@ func (g *Game) checkAvailability(c Coordinate) bool {
 	return false
 }
 
+//Checks if the coordinate x and y is in the range of the board
 func checkRange(c Coordinate) bool {
 	if c.x < 0 || c.x > 2 {
 		return false
@@ -356,6 +375,7 @@ func checkRange(c Coordinate) bool {
 	return true
 }
 
+//Checks if there is a winner
 func (g *Game) checkWinner() bool {
 	won := false
 
