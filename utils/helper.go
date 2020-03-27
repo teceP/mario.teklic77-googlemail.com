@@ -22,6 +22,7 @@ func CheckInputLength(input string) bool {
 }
 
 //Converts the user-input into 2 coordinates (x/y)
+//Returns -1 (x and/or y) if input was false
 func ConvertInput(input string) (int, int) {
 	var col, row = -1, -1
 
