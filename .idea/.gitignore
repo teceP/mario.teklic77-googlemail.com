@@ -1,2 +1,10 @@
 # Default ignored files
 /workspace.xml
+/misc.xml
+/modules.xml
+/tictactoe_go.iml
+/vcs.xml
+
+.idea/
+main/go.mod
+main/main.exe
