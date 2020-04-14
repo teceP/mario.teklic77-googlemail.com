@@ -1,14 +1,14 @@
-package test
+package main
 
 //UNIT TESTS
 
 import (
 	"testing"
-	"tictactoe_go/main"
+	//"tictactoe_go/main"
 )
 
 func Test_CheckInputLength_good(t *testing.T) {
-	legalInput := main.CheckInputLength("A1")
+	legalInput := CheckInputLength("A1")
 
 	if legalInput != true {
 		t.Errorf("Result was: %t, want: %t.", legalInput, true)
@@ -16,7 +16,7 @@ func Test_CheckInputLength_good(t *testing.T) {
 }
 
 func Test_CheckInputLength_bad(t *testing.T) {
-	legalInput := main.CheckInputLength("A/1")
+	legalInput := CheckInputLength("A/1")
 
 	if legalInput != false {
 		t.Errorf("Result was: %t, want: %t.", legalInput, false)
@@ -24,7 +24,7 @@ func Test_CheckInputLength_bad(t *testing.T) {
 }
 
 func Test_ConvertInput_good_0(t *testing.T) {
-	x, y := main.ConvertInput("A1")
+	x, y := ConvertInput("A1")
 
 	if x != 0 {
 		t.Errorf("Result was: %v, want: %v.", x, 0)
@@ -36,7 +36,7 @@ func Test_ConvertInput_good_0(t *testing.T) {
 }
 
 func Test_ConvertInput_good_1(t *testing.T) {
-	x, y := main.ConvertInput("B2")
+	x, y := ConvertInput("B2")
 
 	if x != 1 {
 		t.Errorf("Result was: %v, want: %v.", x, 1)
@@ -48,7 +48,7 @@ func Test_ConvertInput_good_1(t *testing.T) {
 }
 
 func Test_ConvertInput_good_2(t *testing.T) {
-	x, y := main.ConvertInput("C3")
+	x, y := ConvertInput("C3")
 
 	if x != 2 {
 		t.Errorf("Result was: %v, want: %v.", x, 2)
@@ -60,7 +60,7 @@ func Test_ConvertInput_good_2(t *testing.T) {
 }
 
 func Test_ConvertInput_bad_0(t *testing.T) {
-	x, y := main.ConvertInput("D4")
+	x, y := ConvertInput("D4")
 
 	if x != -1 {
 		t.Errorf("Result was: %v, want: %v.", x, -1)
@@ -72,7 +72,7 @@ func Test_ConvertInput_bad_0(t *testing.T) {
 }
 
 func Test_ConvertInput_bad_1(t *testing.T) {
-	x, y := main.ConvertInput("C5")
+	x, y := ConvertInput("C5")
 
 	if x != 2 {
 		t.Errorf("Result was: %v, want: %v.", x, 2)
@@ -84,7 +84,7 @@ func Test_ConvertInput_bad_1(t *testing.T) {
 }
 
 func Test_ConvertInput_bad_2(t *testing.T) {
-	x, y := main.ConvertInput("F3")
+	x, y := ConvertInput("F3")
 
 	if x != -1 {
 		t.Errorf("Result was: %v, want: %v.", x, -1)
@@ -96,7 +96,7 @@ func Test_ConvertInput_bad_2(t *testing.T) {
 }
 
 func Test_EvaluateUserDec_good_0(t *testing.T) {
-	b, err := main.EvaluateUserDec("Y")
+	b, err := EvaluateUserDec("Y")
 
 	if b != true {
 		t.Errorf("Result was: %t, want: %t.", b, true)
@@ -108,7 +108,7 @@ func Test_EvaluateUserDec_good_0(t *testing.T) {
 }
 
 func Test_EvaluateUserDec_good_1(t *testing.T) {
-	b, err := main.EvaluateUserDec("n")
+	b, err := EvaluateUserDec("n")
 
 	if b != false {
 		t.Errorf("Result was: %t, want: %t.", b, false)
@@ -120,7 +120,7 @@ func Test_EvaluateUserDec_good_1(t *testing.T) {
 }
 
 func Test_EvaluateUserDec_bad_0(t *testing.T) {
-	b, err := main.EvaluateUserDec("/")
+	b, err := EvaluateUserDec("/")
 
 	if b != false {
 		t.Errorf("Result was: %t, want: %t.", b, false)
@@ -132,7 +132,7 @@ func Test_EvaluateUserDec_bad_0(t *testing.T) {
 }
 
 func Test_EvaluateUserDec_bad_1(t *testing.T) {
-	b, err := main.EvaluateUserDec("q")
+	b, err := EvaluateUserDec("q")
 
 	if b != false {
 		t.Errorf("Result was: %t, want: %t.", b, false)
@@ -144,7 +144,7 @@ func Test_EvaluateUserDec_bad_1(t *testing.T) {
 }
 
 func Test_EvaluateUserDec_bad_2(t *testing.T) {
-	b, err := main.EvaluateUserDec("1")
+	b, err := EvaluateUserDec("1")
 
 	if b != false {
 		t.Errorf("Result was: %t, want: %t.", b, false)
@@ -156,7 +156,7 @@ func Test_EvaluateUserDec_bad_2(t *testing.T) {
 }
 
 func Test_EvaluateUserDec_bad_3(t *testing.T) {
-	b, err := main.EvaluateUserDec("Yn")
+	b, err := EvaluateUserDec("Yn")
 
 	if b != false {
 		t.Errorf("Result was: %t, want: %t.", b, false)
@@ -168,7 +168,7 @@ func Test_EvaluateUserDec_bad_3(t *testing.T) {
 }
 
 func Test_EvaluateUserDec_bad_4(t *testing.T) {
-	b, err := main.EvaluateUserDec("nY")
+	b, err := EvaluateUserDec("nY")
 
 	if b != false {
 		t.Errorf("Result was: %t, want: %t.", b, false)
