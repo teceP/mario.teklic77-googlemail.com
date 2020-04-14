@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	tw "github.com/olekukonko/tablewriter"
 	"math"
 	"math/rand"
+	"os"
 	"strconv"
 	"time"
 )
@@ -342,14 +344,21 @@ func (b *Board) coordSign(x int, y int) string {
 
 //Prints the board
 func (g *Game) printBoard() {
-	fmt.Println("\n=========================")
-	for i := range g.board.coords {
-		fmt.Print("|  ")
-		for j := range g.board.coords[i] {
-			fmt.Print(g.board.coordSign(i, j), "  |  ")
-		}
-		fmt.Println(" \n-------------------------")
+	data := [][]string{
+		{"A", g.board.coordSign(0, 0), g.board.coordSign(0, 1), g.board.coordSign(0, 2)},
+		{"B", g.board.coordSign(1, 0), g.board.coordSign(1, 1), g.board.coordSign(1, 2)},
+		{"C", g.board.coordSign(2, 0), g.board.coordSign(2, 1), g.board.coordSign(2, 2)}}
+
+	table := tw.NewWriter(os.Stdout)
+
+	table.SetHeader([]string{"+", "1", "2", "3"})
+
+	for _, v := range data {
+		table.Append(v)
 	}
+
+	table.SetBorder(true)
+	table.Render()
 }
 
 // Proofs
