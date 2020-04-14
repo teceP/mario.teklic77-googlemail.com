@@ -8,7 +8,7 @@ import (
 )
 
 func Test_CheckInputLength_good(t *testing.T) {
-	legalInput := main.CheckInputLength("A/1")
+	legalInput := main.CheckInputLength("A1")
 
 	if legalInput != true {
 		t.Errorf("Result was: %t, want: %t.", legalInput, true)
@@ -16,7 +16,7 @@ func Test_CheckInputLength_good(t *testing.T) {
 }
 
 func Test_CheckInputLength_bad(t *testing.T) {
-	legalInput := main.CheckInputLength("A1")
+	legalInput := main.CheckInputLength("A/1")
 
 	if legalInput != false {
 		t.Errorf("Result was: %t, want: %t.", legalInput, false)
@@ -24,7 +24,7 @@ func Test_CheckInputLength_bad(t *testing.T) {
 }
 
 func Test_ConvertInput_good_0(t *testing.T) {
-	x, y := main.ConvertInput("A/1")
+	x, y := main.ConvertInput("A1")
 
 	if x != 0 {
 		t.Errorf("Result was: %v, want: %v.", x, 0)
@@ -36,7 +36,7 @@ func Test_ConvertInput_good_0(t *testing.T) {
 }
 
 func Test_ConvertInput_good_1(t *testing.T) {
-	x, y := main.ConvertInput("B/2")
+	x, y := main.ConvertInput("B2")
 
 	if x != 1 {
 		t.Errorf("Result was: %v, want: %v.", x, 1)
@@ -48,7 +48,7 @@ func Test_ConvertInput_good_1(t *testing.T) {
 }
 
 func Test_ConvertInput_good_2(t *testing.T) {
-	x, y := main.ConvertInput("C/3")
+	x, y := main.ConvertInput("C3")
 
 	if x != 2 {
 		t.Errorf("Result was: %v, want: %v.", x, 2)
@@ -60,7 +60,7 @@ func Test_ConvertInput_good_2(t *testing.T) {
 }
 
 func Test_ConvertInput_bad_0(t *testing.T) {
-	x, y := main.ConvertInput("D/4")
+	x, y := main.ConvertInput("D4")
 
 	if x != -1 {
 		t.Errorf("Result was: %v, want: %v.", x, -1)
@@ -72,7 +72,7 @@ func Test_ConvertInput_bad_0(t *testing.T) {
 }
 
 func Test_ConvertInput_bad_1(t *testing.T) {
-	x, y := main.ConvertInput("C/5")
+	x, y := main.ConvertInput("C5")
 
 	if x != 2 {
 		t.Errorf("Result was: %v, want: %v.", x, 2)
@@ -84,7 +84,7 @@ func Test_ConvertInput_bad_1(t *testing.T) {
 }
 
 func Test_ConvertInput_bad_2(t *testing.T) {
-	x, y := main.ConvertInput("F/3")
+	x, y := main.ConvertInput("F3")
 
 	if x != -1 {
 		t.Errorf("Result was: %v, want: %v.", x, -1)

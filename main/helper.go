@@ -9,11 +9,11 @@ func ReadInput() string {
 	return input
 }
 
-//Checks if the string length is 3
+//Checks if the string length is 2
 func CheckInputLength(input string) bool {
 
-	if len(input) != 3 {
-		fmt.Println("Wrong input. Example: A/1")
+	if len(input) != 2 {
+		fmt.Println("Wrong input. Example: A1")
 		return false
 	}
 

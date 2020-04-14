@@ -139,10 +139,10 @@ func (g *Game) nextMove() Coordinate {
 	good := false
 
 	for !good {
-		fmt.Print(g.activeSing(), ", please insert coords (Example: A/1): ")
+		fmt.Print(g.activeSing(), ", please insert coords (Example: A1): ")
 
 		input := ReadInput()
-		//Convert input like "A/1" to 0/0 or "B/1" to 1/0
+		//Convert input like "A1" to 00 or "B1" to 10
 		c.x, c.y = ConvertInput(input)
 
 		good = CheckInputLength(input) && g.checkAvailability(c)
@@ -358,6 +358,7 @@ func (g *Game) printBoard() {
 	}
 
 	table.SetBorder(true)
+	table.SetAutoWrapText(true)
 	table.Render()
 }
 
