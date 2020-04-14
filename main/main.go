@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"strconv"
 	"tictactoe_go/utils"
+	"time"
 )
 
 // Consts
@@ -81,6 +82,9 @@ func main() {
 	}
 
 	fmt.Println("Goodbye.")
+
+	duration := time.Duration(10) * time.Second
+	time.Sleep(duration)
 }
 
 // Board actions
@@ -339,7 +343,7 @@ func (b *Board) coordSign(x int, y int) string {
 
 //Prints the board
 func (g *Game) printBoard() {
-	fmt.Println("=========================")
+	fmt.Println("\n=========================")
 	for i := range g.board.coords {
 		fmt.Print("|  ")
 		for j := range g.board.coords[i] {
