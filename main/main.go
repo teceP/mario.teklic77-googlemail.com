@@ -5,7 +5,6 @@ import (
 	"math"
 	"math/rand"
 	"strconv"
-	"tictactoe_go/utils"
 	"time"
 )
 
@@ -49,15 +48,15 @@ func main() {
 
 	//Let the user decide if he wants to play against the computer or not:
 	fmt.Print("Do you want to play against the computer? Y/n ")
-	usersDec := utils.ReadInput()
+	usersDec := ReadInput()
 	var err error
-	game.computer, err = utils.EvaluateUserDec(usersDec)
+	game.computer, err = EvaluateUserDec(usersDec)
 
 	for err != nil {
 		fmt.Println(err)
 		fmt.Print("Do you want to play against the computer? Y/n ")
-		usersDec = utils.ReadInput()
-		game.computer, err = utils.EvaluateUserDec(usersDec)
+		usersDec = ReadInput()
+		game.computer, err = EvaluateUserDec(usersDec)
 	}
 
 	//Preps
@@ -140,11 +139,11 @@ func (g *Game) nextMove() Coordinate {
 	for !good {
 		fmt.Print(g.activeSing(), ", please insert coords (Example: A/1): ")
 
-		input := utils.ReadInput()
+		input := ReadInput()
 		//Convert input like "A/1" to 0/0 or "B/1" to 1/0
-		c.x, c.y = utils.ConvertInput(input)
+		c.x, c.y = ConvertInput(input)
 
-		good = utils.CheckInputLength(input) && g.checkAvailability(c)
+		good = CheckInputLength(input) && g.checkAvailability(c)
 	}
 
 	fmt.Println("Shot will be perfomed!")
